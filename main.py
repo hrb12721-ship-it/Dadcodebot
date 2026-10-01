@@ -6,7 +6,7 @@ from aiogram import Bot, Dispatcher, types
 # این بخش را با اطلاعات خودت پر کن
 TG_BOT_TOKEN = "8933088010:AAFARHEe3dHoXHZScbQXOMRuvX8B4CPEVBQ"
 BALE_BOT_TOKEN = "162149318:Io3oxPfSkXPIhOiyGj_WiJiXqMa5L2ODmxc"
-ADMIN_USER_ID = # 6196901789
+ADMIN_USER_ID =  6196901789
 # --- راه‌اندازی ربات‌ها ---
 bot_tg = Bot(token=TG_BOT_TOKEN)
 bot_bale = Bot(token=BALE_BOT_TOKEN)
