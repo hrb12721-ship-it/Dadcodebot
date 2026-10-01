@@ -1,4 +1,3 @@
-
 import asyncio
 import logging
 import os
@@ -7,32 +6,27 @@ from flask import Flask
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 
-# تنظیمات لاگینگ
 logging.basicConfig(level=logging.INFO)
 
-# توکن‌های ربات
-TG_BOT_TOKEN = "GAPGPTMASKTOKENi07qyaghyfX0X"
+TG_BOT_TOKEN = "GAPGPTMASKTOKENkw383plmuubX0X"
 ADMIN_USER_ID = 6196901789
 
-# ساخت اشیاء ربات و دیسپچر
-bot_tg = Bot(token=GAPGPTMASKTOKENi07qyaghyfX1X
+bot_tg = Bot(token=TG_BOT_TOKEN)
 dp = Dispatcher()
 
-# سرور Flask برای فعال نگه‌داشتن پورت رندر
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "دادکُد فعال است!"
+    return "Dadcode Bot is Live!"
 
 def run_web():
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
 
-# هندلرهای پیام
 @dp.message(Command("start"))
 async def send_welcome(message: types.Message):
-    await message.answer("سلام مریم عزیز! 🌸\nربات **دادکُد** فعال و آماده پاسخگویی است.")
+    await message.answer("سلام مریم عزیز! 🌸\nربات دادکُد فعال است.")
 
 @dp.message()
 async def echo_handler(message: types.Message):
