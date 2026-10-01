@@ -1,6 +1,6 @@
+import os
 import asyncio
 import logging
-import os
 from threading import Thread
 from flask import Flask
 from aiogram import Bot, Dispatcher, types
@@ -8,37 +8,43 @@ from aiogram.filters import Command
 
 logging.basicConfig(level=logging.INFO)
 
-TG_BOT_TOKEN = "GAPGPTMASKTOKENkw383plmuubX0X"
+TG_BOT_TOKEN = "GAPGPTMASKTOKEN162bfgg7jemX0X"
 ADMIN_USER_ID = 6196901789
 
-bot_tg = Bot(token=TG_BOT_TOKEN)
+# ساخت کلاینت ربات
+bot = Bot(token=GAPGPTMASKTOKEN162bfgg7jemX1X
 dp = Dispatcher()
 
+# تعریف وب‌سرور برای زنده نگه‌داشتن روی رندر
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return "Dadcode Bot is Live!"
+@app.route("/")
+def index():
+    return "Dadcode is live!"
 
-def run_web():
+def run_flask():
     port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host="0.0.0.0", port=port, use_reloader=False)
 
+# هندلر دستور استارت
 @dp.message(Command("start"))
-async def send_welcome(message: types.Message):
-    await message.answer("سلام مریم عزیز! 🌸\nربات دادکُد فعال است.")
+async def start_handler(message: types.Message):
+    await message.answer("سلام حسن عزیز! 🌸\nربات دادکُد فعال است و پیام شما دریافت شد.")
 
+# هندلر تمام پیام‌های متنی
 @dp.message()
-async def echo_handler(message: types.Message):
-    await message.answer(f"پیام شما دریافت شد:\n{message.text}")
+async def all_messages_handler(message: types.Message):
+    await message.reply(f"پیام شما دریافت شد:\n{message.text}")
 
-async def main():
-    await bot_tg.delete_webhook(drop_pending_updates=True)
-    await dp.start_polling(bot_tg)
+async def run_bot():
+    await bot.delete_webhook(drop_pending_updates=True)
+    await dp.start_polling(bot)
 
 if __name__ == "__main__":
-    web_thread = Thread(target=run_web)
-    web_thread.daemon = True
-    web_thread.start()
+    # اجرای وب‌سرور در پس‌زمینه
+    flask_thread = Thread(target=run_flask)
+    flask_thread.daemon = True
+    flask_thread.start()
     
-    asyncio.run(main())
+    # اجرای ربات اصلی
+    asyncio.run(run_bot())
